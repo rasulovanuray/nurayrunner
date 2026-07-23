@@ -5,9 +5,10 @@
 }
 
 body{
-    background:#87CEEB;
+    margin:0;
     overflow:hidden;
-    font-family:Arial;
+    background:linear-gradient(#87CEEB,#bfefff);
+    font-family:Arial, sans-serif;
 }
 
 #game{
@@ -17,26 +18,131 @@ body{
     overflow:hidden;
 }
 
+/* Günəş */
+#sun{
+    width:100px;
+    height:100px;
+    background:#FFD93D;
+    border-radius:50%;
+    position:absolute;
+    top:40px;
+    right:70px;
+    box-shadow:0 0 50px #FFD93D;
+}
+
+/* Buludlar */
+.cloud{
+    position:absolute;
+    width:140px;
+    height:50px;
+    background:white;
+    border-radius:50px;
+    opacity:.9;
+}
+
+.cloud::before{
+    content:"";
+    position:absolute;
+    width:60px;
+    height:60px;
+    background:white;
+    border-radius:50%;
+    left:20px;
+    top:-25px;
+}
+
+.cloud::after{
+    content:"";
+    position:absolute;
+    width:70px;
+    height:70px;
+    background:white;
+    border-radius:50%;
+    right:15px;
+    top:-30px;
+}
+
+#cloud1{
+    top:70px;
+    left:150px;
+    animation:cloudMove 30s linear infinite;
+}
+
+#cloud2{
+    top:170px;
+    left:700px;
+    animation:cloudMove 40s linear infinite;
+}
+
+@keyframes cloudMove{
+    from{
+        transform:translateX(120vw);
+    }
+    to{
+        transform:translateX(-160vw);
+    }
+}
+
+/* Ot */
+#ground{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:120px;
+    background:#3CB043;
+}
+
+/* Ağaclar */
+.tree{
+    position:absolute;
+    bottom:120px;
+    width:35px;
+    height:80px;
+    background:#7A4B22;
+}
+
+.tree::after{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    background:#2E8B57;
+    border-radius:50%;
+    left:-28px;
+    top:-60px;
+}
+
+#tree1{
+    left:450px;
+}
+
+#tree2{
+    left:900px;
+}
+
 #score{
     position:absolute;
     top:20px;
     left:20px;
     font-size:30px;
     font-weight:bold;
+    z-index:10;
 }
 
 #player{
     width:120px;
     position:absolute;
-    bottom:0;
+    bottom:120px;
     left:120px;
+    z-index:5;
 }
 
 #obstacle{
     width:70px;
     height:120px;
-    background:black;
+    background:#444;
     position:absolute;
-    bottom:0;
+    bottom:120px;
     right:-100px;
+    border-radius:10px;
 }

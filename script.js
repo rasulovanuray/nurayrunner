@@ -4,72 +4,88 @@ const scoreText = document.getElementById("score");
 
 let jumping = false;
 let score = 0;
+let speed = 8;
 
-function jump(){
+function jump() {
 
-    if(jumping) return;
+    if (jumping) return;
 
     jumping = true;
 
-    let position = 0;
+    let position = 120;
 
-    let up = setInterval(()=>{
+    let up = setInterval(() => {
 
-        if(position >= 180){
+        if (position >= 320) {
+
             clearInterval(up);
 
-            let down = setInterval(()=>{
+            let down = setInterval(() => {
 
-                if(position <= 0){
+                if (position <= 120) {
+
                     clearInterval(down);
                     jumping = false;
-                }else{
+
+                } else {
+
                     position -= 5;
                     player.style.bottom = position + "px";
+
                 }
 
-            },20);
+            }, 20);
 
-        }else{
+        } else {
+
             position += 5;
             player.style.bottom = position + "px";
+
         }
 
-    },20);
+    }, 20);
 
 }
 
-document.addEventListener("keydown",(e)=>{
-    if(e.code==="Space"){
-        jump();
-    }
+document.addEventListener("keydown", e => {
+    if (e.code === "Space") jump();
 });
 
-document.addEventListener("click",jump);
+document.addEventListener("click", jump);
 
 let obstaclePos = window.innerWidth;
 
-setInterval(()=>{
+setInterval(() => {
 
-    obstaclePos -= 8;
+    obstaclePos -= speed;
 
     obstacle.style.left = obstaclePos + "px";
 
-    if(obstaclePos < -70){
-        obstaclePos = window.innerWidth;
+    if (obstaclePos < -100) {
+
+        obstaclePos = window.innerWidth + Math.random() * 300;
+
         score++;
+
         scoreText.innerHTML = "Score: " + score;
+
+        if (score % 5 === 0) {
+            speed++;
+        }
+
     }
 
-    let playerBottom = parseInt(player.style.bottom) || 0;
+    let playerBottom = parseInt(player.style.bottom) || 120;
 
-    if(
+    if (
         obstaclePos < 220 &&
-        obstaclePos > 120 &&
-        playerBottom < 90
-    ){
-        alert("💥 Game Over!\nScore: " + score);
+        obstaclePos > 110 &&
+        playerBottom < 220
+    ) {
+
+        alert("💥 Game Over!\n\nScore: " + score);
         location.reload();
+
     }
 
-},20);
+}, 20);
